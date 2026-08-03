@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('demo') {
+        stage('lint') {
             steps {
-                echo 'hello'
+                sh './gradlew lint'
             }
         }
     }
