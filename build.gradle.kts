@@ -3,4 +3,5 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply  false
     alias(libs.plugins.vanniktech.mavenPublish) apply false
     id("nl.littlerobots.version-catalog-update") version "1.1.1"
+    alias(libs.plugins.android.lint) apply false
 }

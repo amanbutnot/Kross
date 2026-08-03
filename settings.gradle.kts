@@ -18,3 +18,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Kross"
 include(":library")
+include(":kross-clipboard")
