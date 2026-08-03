@@ -10,7 +10,7 @@ group = "io.github.amanbutnot"
 version = "1.0.0"
 
 kotlin {
-    androidLibrary {
+    android {
         namespace = "org.jetbrains.kotlinx.multiplatform.library.template"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
@@ -20,7 +20,10 @@ kotlin {
         withDeviceTestBuilder {
             sourceSetTreeName = "test"
         }
-
+        lint {
+            abortOnError = true
+            warningsAsErrors = true
+        }
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
         }
