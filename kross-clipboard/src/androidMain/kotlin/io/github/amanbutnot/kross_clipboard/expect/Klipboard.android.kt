@@ -4,12 +4,13 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import io.github.amanbutnot.kross_clipboard.enums.KlipData
+import io.github.amanbutnot.kross_clipboard.enums.KlipType
 
 actual class Klipboard(private val context: Context) {
     val clip = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    actual fun getData(klipData: KlipData): KlipData? {
-        return when (klipData) {
-            is KlipData.HTML -> {
+    actual fun getData(klipType: KlipType): KlipData? {
+        return when (klipType) {
+            KlipType.HTML -> {
                 if (clip.hasPrimaryClip()) {
                     val a = clip.primaryClip
                     KlipData.HTML(a?.getItemAt(0)?.coerceToText(context).toString())
@@ -18,7 +19,7 @@ actual class Klipboard(private val context: Context) {
                 }
             }
 
-            is KlipData.TEXT -> {
+            KlipType.TEXT -> {
                 if (clip.hasPrimaryClip()) {
                     val a = clip.primaryClip
                     KlipData.TEXT(a?.getItemAt(0)?.coerceToText(context).toString())
@@ -27,7 +28,7 @@ actual class Klipboard(private val context: Context) {
                 }
             }
 
-            is KlipData.URL -> {
+            KlipType.URL -> {
                 if (clip.hasPrimaryClip()) {
                     val a = clip.primaryClip
                     KlipData.URL(a?.getItemAt(0)?.coerceToText(context).toString())

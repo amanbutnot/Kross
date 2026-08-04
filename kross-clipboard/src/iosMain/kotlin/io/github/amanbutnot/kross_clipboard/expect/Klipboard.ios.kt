@@ -1,21 +1,26 @@
 package io.github.amanbutnot.kross_clipboard.expect
 
 import io.github.amanbutnot.kross_clipboard.enums.KlipData
+import io.github.amanbutnot.kross_clipboard.enums.KlipType
+import platform.Foundation.NSData
+import platform.Foundation.dataWithBytes
+import platform.Foundation.dataWithData
+import platform.UIKit.UIImage
 import platform.UIKit.UIPasteboard
 
 actual class Klipboard {
     val clip = UIPasteboard.generalPasteboard
-    actual fun getData(klipData: KlipData): KlipData? {
-        return when (klipData) {
-            is KlipData.HTML -> {
+    actual fun getData(klipType: KlipType): KlipData? {
+        return when (klipType) {
+            KlipType.HTML -> {
                 KlipData.TEXT(clip.string ?: "")
             }
 
-            is KlipData.TEXT -> {
+            KlipType.TEXT -> {
                 KlipData.TEXT(clip.string ?: "")
             }
 
-            is KlipData.URL -> {
+            KlipType.URL -> {
                 KlipData.TEXT(clip.string ?: "")
             }
         }

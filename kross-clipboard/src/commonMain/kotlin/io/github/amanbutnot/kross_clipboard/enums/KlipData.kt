@@ -6,3 +6,7 @@ sealed class KlipData {
     data class HTML(val value: String) : KlipData()
     data class URL(val value: String) : KlipData()
 }
+
+enum class KlipType {
+    TEXT, HTML, URL
+}
