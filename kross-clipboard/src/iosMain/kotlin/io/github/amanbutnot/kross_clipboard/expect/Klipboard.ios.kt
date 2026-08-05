@@ -13,7 +13,7 @@ actual class Klipboard {
     actual fun getData(klipType: KlipType): KlipData? {
         return when (klipType) {
             KlipType.HTML -> {
-                KlipData.TEXT(clip.string ?: "")
+                KlipData.HTML(clip.string ?: "")
             }
 
             KlipType.TEXT -> {
@@ -21,7 +21,7 @@ actual class Klipboard {
             }
 
             KlipType.URL -> {
-                KlipData.TEXT(clip.string ?: "")
+                KlipData.URL(clip.string ?: "")
             }
         }
     }

@@ -9,34 +9,32 @@ import io.github.amanbutnot.kross_clipboard.enums.KlipType
 actual class Klipboard(private val context: Context) {
     val clip = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     actual fun getData(klipType: KlipType): KlipData? {
-        return when (klipType) {
-            KlipType.HTML -> {
-                if (clip.hasPrimaryClip()) {
-                    val a = clip.primaryClip
-                    KlipData.HTML(a?.getItemAt(0)?.coerceToText(context).toString())
-                } else {
-                    null
-                }
-            }
+        return if (clip.hasPrimaryClip()) {
+            val mainClip = clip.primaryClip
+            when (klipType) {
+                KlipType.HTML -> {
 
-            KlipType.TEXT -> {
-                if (clip.hasPrimaryClip()) {
-                    val a = clip.primaryClip
-                    KlipData.TEXT(a?.getItemAt(0)?.coerceToText(context).toString())
-                } else {
-                    null
-                }
-            }
+                    KlipData.HTML(mainClip?.getItemAt(0)?.coerceToText(context).toString())
 
-            KlipType.URL -> {
-                if (clip.hasPrimaryClip()) {
-                    val a = clip.primaryClip
-                    KlipData.URL(a?.getItemAt(0)?.coerceToText(context).toString())
-                } else {
-                    null
+                }
+
+                KlipType.TEXT -> {
+
+                    KlipData.TEXT(mainClip?.getItemAt(0)?.coerceToText(context).toString())
+
+                }
+
+                KlipType.URL -> {
+
+
+                    KlipData.URL(mainClip?.getItemAt(0)?.coerceToText(context).toString())
+
                 }
             }
+        } else {
+            null
         }
+
     }
 
     actual fun saveData(klipData: KlipData) {
