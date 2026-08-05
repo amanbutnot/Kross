@@ -21,7 +21,17 @@ Kross provides a type-safe, unified API to interact with system clipboards acros
 
 ## Installation
 
-Add Kross to your `commonMain` dependencies in your `build.gradle.kts`:
+Add Maven Central to your repositories:
+
+```kotlin
+repositories {
+    mavenCentral()
+}
+```
+
+### Kotlin Multiplatform
+
+Add Kross to `commonMain` in your `build.gradle.kts`:
 
 ```kotlin
 kotlin {
@@ -32,6 +42,31 @@ kotlin {
     }
 }
 ```
+
+### Android Only
+
+```kotlin
+dependencies {
+    implementation("io.github.amanbutnot:kross-android:1.0.0")
+}
+```
+
+### iOS Only
+
+For specific targets:
+
+```kotlin
+dependencies {
+    // iOS ARM64
+    implementation("io.github.amanbutnot:kross-iosarm64:1.0.0")
+    
+    // iOS Simulator (Apple Silicon)
+    implementation("io.github.amanbutnot:kross-iossimulatorarm64:1.0.0")
+}
+```
+
+> [!TIP]
+> **Preferred Approach**: For Kotlin Multiplatform projects, use the `commonMain` dependency `io.github.amanbutnot:kross:1.0.0`. Gradle will automatically resolve the correct platform artifact.
 
 ## Usage
 
@@ -68,10 +103,10 @@ val html = klipboard.getData(KlipType.HTML) as? KlipData.HTML
 
 ## Platform Support
 
-| Platform | Minimum Version | Implementation |
-| :--- | :--- | :--- |
+| Platform    | Minimum Version | Implementation     |
+|:------------|:----------------|:-------------------|
 | **Android** | API 24 (Nougat) | `ClipboardManager` |
-| **iOS** | iOS 13.0 | `UIPasteboard` |
+| **iOS**     | iOS 13.0        | `UIPasteboard`     |
 
 ## License
 
