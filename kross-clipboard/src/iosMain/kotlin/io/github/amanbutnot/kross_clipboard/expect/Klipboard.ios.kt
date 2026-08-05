@@ -2,34 +2,58 @@ package io.github.amanbutnot.kross_clipboard.expect
 
 import io.github.amanbutnot.kross_clipboard.enums.KlipData
 import io.github.amanbutnot.kross_clipboard.enums.KlipType
-import platform.Foundation.NSData
-import platform.Foundation.dataWithBytes
-import platform.Foundation.dataWithData
-import platform.UIKit.UIImage
+import kotlinx.cinterop.BetaInteropApi
+import platform.Foundation.NSString
+import platform.Foundation.NSURL
+import platform.Foundation.NSUTF8StringEncoding
+import platform.Foundation.create
+import platform.Foundation.dataUsingEncoding
 import platform.UIKit.UIPasteboard
 
+@Suppress("CAST_NEVER_SUCCEEDS")
 actual class Klipboard {
     val clip = UIPasteboard.generalPasteboard
+
+    @OptIn(BetaInteropApi::class)
     actual fun getData(klipType: KlipType): KlipData? {
         return when (klipType) {
-            KlipType.HTML -> {
-                KlipData.HTML(clip.string ?: "")
-            }
-
             KlipType.TEXT -> {
                 KlipData.TEXT(clip.string ?: "")
             }
 
+            KlipType.HTML -> {
+                val data = clip.dataForPasteboardType("public.html")
+
+                data?.let {
+                    KlipData.HTML(
+                        NSString.create(
+                            data = it,
+                            encoding = NSUTF8StringEncoding
+                        ).toString()
+                    )
+                }
+            }
+
             KlipType.URL -> {
-                KlipData.URL(clip.string ?: "")
+                clip.URL?.absoluteString?.let {
+                    KlipData.URL(it)
+                }
             }
         }
     }
 
+    @OptIn(BetaInteropApi::class)
     actual fun saveData(klipData: KlipData) {
         when (klipData) {
             is KlipData.HTML -> {
-                clip.string = klipData.value
+                NSString.create(
+                    string = klipData.value
+                ).dataUsingEncoding(NSUTF8StringEncoding)?.let {
+                    clip.setData(
+                        it,
+                        "public.html"
+                    )
+                }
             }
 
             is KlipData.TEXT -> {
@@ -37,7 +61,7 @@ actual class Klipboard {
             }
 
             is KlipData.URL -> {
-                clip.string = klipData.value
+                clip.URL = NSURL(string = klipData.value)
             }
         }
     }

@@ -3,6 +3,7 @@ package io.github.amanbutnot.kross_clipboard.expect
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.net.Uri
 import io.github.amanbutnot.kross_clipboard.enums.KlipData
 import io.github.amanbutnot.kross_clipboard.enums.KlipType
 
@@ -14,7 +15,7 @@ actual class Klipboard(private val context: Context) {
             when (klipType) {
                 KlipType.HTML -> {
 
-                    KlipData.HTML(mainClip?.getItemAt(0)?.coerceToText(context).toString())
+                    KlipData.HTML(mainClip?.getItemAt(0)?.coerceToHtmlText(context).toString())
 
                 }
 
@@ -27,7 +28,7 @@ actual class Klipboard(private val context: Context) {
                 KlipType.URL -> {
 
 
-                    KlipData.URL(mainClip?.getItemAt(0)?.coerceToText(context).toString())
+                    KlipData.URL(mainClip?.getItemAt(0)?.uri.toString())
 
                 }
             }
@@ -40,7 +41,7 @@ actual class Klipboard(private val context: Context) {
     actual fun saveData(klipData: KlipData) {
         when (klipData) {
             is KlipData.HTML -> {
-                val data = ClipData.newPlainText("html", klipData.value)
+                val data = ClipData.newHtmlText("html", klipData.value, "-")
                 clip.setPrimaryClip(data)
             }
 
@@ -50,7 +51,7 @@ actual class Klipboard(private val context: Context) {
             }
 
             is KlipData.URL -> {
-                val data = ClipData.newPlainText("url", klipData.value)
+                val data = ClipData.newRawUri("url", Uri.parse(klipData.value))
                 clip.setPrimaryClip(data)
             }
         }
