@@ -47,31 +47,31 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates(group.toString(), "library", version.toString())
+    coordinates(group.toString(), "kross", version.toString())
 
     pom {
-        name = "My library"
-        description = "A library."
-        inceptionYear = "2024"
-        url = "https://github.com/kotlin/multiplatform-library-template/"
+        name = "Kross"
+        description = "All in one compose multipaltform library."
+        inceptionYear = "2026"
+        url = "https://github.com/amanbutnot/Kross.git"
         licenses {
             license {
-                name = "XXX"
-                url = "YYY"
-                distribution = "ZZZ"
+                name = "Apache License 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0"
+                distribution = "repo"
             }
         }
         developers {
             developer {
-                id = "XXX"
-                name = "YYY"
-                url = "ZZZ"
+                id = "amanbutnot"
+                name = "Aman"
+                url = "https://github.com/amanbutnot"
             }
         }
         scm {
-            url = "XXX"
-            connection = "YYY"
-            developerConnection = "ZZZ"
+            url = "https://github.com/amanbutnot/kross"
+            connection = "scm:git:git://github.com/amanbutnot/kross.git"
+            developerConnection = "scm:git:ssh://git@github.com/amanbutnot/kross.git"
         }
     }
 }
