@@ -1,16 +1,16 @@
 <p align="center">
-  <h1 align="center">Kross</h1>
+  <h1 align="center">Kross Clipboard</h1>
   <p align="center">Minimalist Kotlin Multiplatform clipboard management for Android and iOS.</p>
   <p align="center">
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
-    <a href="https://central.sonatype.com/"><img src="https://img.shields.io/maven-central/v/io.github.amanbutnot/kross.svg" alt="Maven Central"></a>
+    <a href="https://central.sonatype.com/"><img src="https://img.shields.io/maven-central/v/io.github.amanbutnot/kross-clipboard.svg" alt="Maven Central"></a>
     <img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS-lightgrey.svg" alt="Platforms">
   </p>
 </p>
 
 ---
 
-Kross provides a type-safe, unified API to interact with system clipboards across different platforms. It abstracts away platform-specific implementations like `ClipboardManager` on Android and `UIPasteboard` on iOS.
+Kross Clipboard provides a type-safe, unified API to interact with system clipboards across different platforms. It abstracts away platform-specific implementations like `ClipboardManager` on Android and `UIPasteboard` on iOS.
 
 ## Features
 
@@ -31,13 +31,13 @@ repositories {
 
 ### Kotlin Multiplatform
 
-Add Kross to `commonMain` in your `build.gradle.kts`:
+Add Kross Clipboard to `commonMain` in your `build.gradle.kts`:
 
 ```kotlin
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.amanbutnot:kross:1.0.0")
+            implementation("io.github.amanbutnot:kross-clipboard:<latest>")
         }
     }
 }
@@ -47,7 +47,7 @@ kotlin {
 
 ```kotlin
 dependencies {
-    implementation("io.github.amanbutnot:kross-android:1.0.0")
+    implementation("io.github.amanbutnot:kross-clipboard-android:<latest>")
 }
 ```
 
@@ -58,27 +58,23 @@ For specific targets:
 ```kotlin
 dependencies {
     // iOS ARM64
-    implementation("io.github.amanbutnot:kross-iosarm64:1.0.0")
+    implementation("io.github.amanbutnot:kross-clipboard-iosarm64:<latest>")
     
     // iOS Simulator (Apple Silicon)
-    implementation("io.github.amanbutnot:kross-iossimulatorarm64:1.0.0")
+    implementation("io.github.amanbutnot:kross-clipboard-iossimulatorarm64:<latest>")
 }
 ```
 
 > [!TIP]
-> **Preferred Approach**: For Kotlin Multiplatform projects, use the `commonMain` dependency `io.github.amanbutnot:kross:1.0.0`. Gradle will automatically resolve the correct platform artifact.
+> **Preferred Approach**: For Kotlin Multiplatform projects, use the `commonMain` dependency `io.github.amanbutnot:kross-clipboard:<latest>`. Gradle will automatically resolve the correct platform artifact.
 
 ## Usage
 
 ### 1. Initialization
 
-On Android, the `Klipboard` instance requires a `Context`. On iOS, it is initialized without arguments.
+`Klipboard` is initialized without arguments on all platforms.
 
 ```kotlin
-// Android implementation
-val klipboard = Klipboard(context)
-
-// iOS implementation
 val klipboard = Klipboard()
 ```
 
@@ -110,4 +106,4 @@ val html = klipboard.getData(KlipType.HTML) as? KlipData.HTML
 
 ## License
 
-Kross is available under the Apache License 2.0. See the [LICENSE](LICENSE) file for more info.
+Kross Clipboard is available under the Apache License 2.0. See the [LICENSE](LICENSE) file for more info.
