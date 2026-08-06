@@ -2,6 +2,47 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.android.lint)
+    alias(libs.plugins.vanniktech.mavenPublish)
+}
+
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
+
+    coordinates(
+        groupId = "io.github.amanbutnot",
+        artifactId = "kross-clipboard",
+        version = "1.0.3"
+    )
+
+    pom {
+        name = "Kross Clipboard"
+        description = "A Kotlin Multiplatform clipboard library for accessing and managing clipboard data across Android and iOS."
+        inceptionYear = "2026"
+        url = "https://github.com/amanbutnot/Kross"
+
+        licenses {
+            license {
+                name = "Apache License 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0"
+                distribution = "repo"
+            }
+        }
+
+        developers {
+            developer {
+                id = "amanbutnot"
+                name = "Aman"
+                url = "https://github.com/amanbutnot"
+            }
+        }
+
+        scm {
+            url = "https://github.com/amanbutnot/kross"
+            connection = "scm:git:git://github.com/amanbutnot/kross.git"
+            developerConnection = "scm:git:ssh://git@github.com/amanbutnot/kross.git"
+        }
+    }
 }
 
 kotlin {
@@ -12,7 +53,7 @@ kotlin {
     android {
         namespace = "io.github.amanbutnot.kross_clipboard"
         compileSdk {
-            version = release(37)
+            version = release(36)
         }
         minSdk = 24
 

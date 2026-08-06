@@ -7,7 +7,8 @@ import android.net.Uri
 import io.github.amanbutnot.kross_clipboard.enums.KlipData
 import io.github.amanbutnot.kross_clipboard.enums.KlipType
 
-actual class Klipboard(private val context: Context) {
+actual class Klipboard actual constructor() {
+    val context = KrossApplication.instance
     val clip = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     actual fun getData(klipType: KlipType): KlipData? {
         return if (clip.hasPrimaryClip()) {
