@@ -20,3 +20,4 @@ rootProject.name = "Kross"
 include(":library")
 include(":kross-clipboard")
 include(":krossplayground")
+include(":kross-intents")

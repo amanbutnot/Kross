@@ -42,8 +42,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ClipboardPlayground() {
-    val context = LocalContext.current
-    val klip = remember { Klipboard(context) }
+    val klip = remember { Klipboard() }
 
     var textResult by remember { mutableStateOf("Nothing read yet") }
     var htmlResult by remember { mutableStateOf("Nothing read yet") }
