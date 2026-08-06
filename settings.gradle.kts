@@ -19,5 +19,5 @@ dependencyResolutionManagement {
 rootProject.name = "Kross"
 include(":kross")
 include(":kross-clipboard")
-include(":krossplayground")
+include(":kross-playground")
 include(":kross-intents")
