@@ -12,7 +12,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.amanbutnot",
         artifactId = "kross-clipboard",
-        version = "1.0.3"
+        version = libs.versions.kross.get()
     )
 
     pom {

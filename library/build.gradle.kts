@@ -7,11 +7,12 @@ plugins {
 }
 
 group = "io.github.amanbutnot"
-version = "1.0.0"
+version = libs.versions.kross.get()
 
 kotlin {
     android {
-        namespace = "org.jetbrains.kotlinx.multiplatform.library.template"
+        namespace = "io.github.amanbutnot.kross"
+        //noinspection GradleDependency
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -34,6 +35,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             //put your multiplatform dependencies here
+            api("io.github.amanbutnot:kross-clipboard:${libs.versions.kross.get()}")
         }
 
         commonTest.dependencies {
@@ -51,7 +53,7 @@ mavenPublishing {
 
     pom {
         name = "Kross"
-        description = "All in one compose multipaltform library."
+        description = "All in one compose multiplatform library."
         inceptionYear = "2026"
         url = "https://github.com/amanbutnot/Kross.git"
         licenses {
