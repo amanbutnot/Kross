@@ -35,7 +35,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             //put your multiplatform dependencies here
-            api("io.github.amanbutnot:kross-clipboard:${libs.versions.kross.get()}")
         }
 
         commonTest.dependencies {
@@ -49,7 +48,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates(group.toString(), "kross", version.toString())
+    coordinates(group.toString(), "kross-core", version.toString())
 
     pom {
         name = "Kross"
