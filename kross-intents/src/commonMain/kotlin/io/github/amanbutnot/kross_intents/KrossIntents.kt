@@ -6,7 +6,4 @@ expect object KrossIntents {
     fun openSms(phone: String, message: String? = null)
     fun openMaps(latitude: Double, longitude: Double)
     fun openSettings()
-    fun openWifiSettings()
-    fun openBluetoothSettings()
-    fun openAppSettings()
 }

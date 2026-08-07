@@ -2,6 +2,48 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.android.lint)
+    alias(libs.plugins.vanniktech.mavenPublish)
+
+}
+
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
+
+    coordinates(
+        groupId = "io.github.amanbutnot",
+        artifactId = "kross-intents",
+        version = libs.versions.kross.get()
+    )
+
+    pom {
+        name = "Kross Intents"
+        description = "A Kotlin Multiplatform intents library for triggering system actions across Android and iOS."
+        inceptionYear = "2026"
+        url = "https://github.com/amanbutnot/Kross"
+
+        licenses {
+            license {
+                name = "Apache License 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0"
+                distribution = "repo"
+            }
+        }
+
+        developers {
+            developer {
+                id = "amanbutnot"
+                name = "Aman"
+                url = "https://github.com/amanbutnot"
+            }
+        }
+
+        scm {
+            url = "https://github.com/amanbutnot/kross"
+            connection = "scm:git:git://github.com/amanbutnot/kross.git"
+            developerConnection = "scm:git:ssh://git@github.com/amanbutnot/kross.git"
+        }
+    }
 }
 
 kotlin {
@@ -77,6 +119,7 @@ kotlin {
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
+                implementation(project(":kross-core"))
             }
         }
 
