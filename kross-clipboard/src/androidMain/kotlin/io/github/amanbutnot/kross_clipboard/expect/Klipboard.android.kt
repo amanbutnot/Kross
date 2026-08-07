@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.Uri
 import io.github.amanbutnot.kross_clipboard.enums.KlipData
 import io.github.amanbutnot.kross_clipboard.enums.KlipType
+import io.github.kotlin.fibonacci.KrossApplication
 
 actual class Klipboard actual constructor() {
     val context = KrossApplication.instance
