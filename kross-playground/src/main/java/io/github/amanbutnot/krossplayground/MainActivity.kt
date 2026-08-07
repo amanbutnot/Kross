@@ -10,22 +10,29 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import io.github.amanbutnot.kross_clipboard.enums.KlipData
 import io.github.amanbutnot.kross_clipboard.enums.KlipType
 import io.github.amanbutnot.kross_clipboard.expect.Klipboard
+import io.github.amanbutnot.kross_intents.KrossIntents
 import io.github.amanbutnot.krossplayground.ui.theme.KrossTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +41,86 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             KrossTheme {
-                ClipboardPlayground()
+                MainScreen()
             }
+        }
+    }
+}
+
+@Composable
+fun MainScreen() {
+    val pagerState = rememberPagerState { 2 }
+    val coroutineScope = rememberCoroutineScope()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .safeDrawingPadding()
+    ) {
+        TabRow(selectedTabIndex = pagerState.currentPage) {
+            Tab(
+                selected = pagerState.currentPage == 0,
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(0)
+                    }
+                },
+                text = { Text("Clipboard") }
+            )
+            Tab(
+                selected = pagerState.currentPage == 1,
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(1)
+                    }
+                },
+                text = { Text("Intents") }
+            )
+        }
+
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxSize()
+        ) { page ->
+            when (page) {
+                0 -> ClipboardPlayground()
+                1 -> IntentsPlayground()
+            }
+        }
+    }
+}
+
+@Composable
+fun IntentsPlayground() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text("INTENTS")
+
+        Spacer(Modifier.height(16.dp))
+
+        Button(onClick = { KrossIntents.openEmail("test@example.com", "Hello", "Body") }) {
+            Text("Open Email")
+        }
+
+        Button(onClick = { KrossIntents.openPhone("1234567890") }) {
+            Text("Open Phone")
+        }
+
+        Button(onClick = { KrossIntents.openSms("1234567890", "Hello from Kross!") }) {
+            Text("Open SMS")
+        }
+
+        Button(onClick = { KrossIntents.openMaps(37.7749, -122.4194) }) {
+            Text("Open Maps (SF)")
+        }
+
+        Button(onClick = { KrossIntents.openSettings() }) {
+            Text("Open Settings")
         }
     }
 }

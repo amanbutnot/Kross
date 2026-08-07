@@ -52,4 +52,5 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
     debugImplementation(libs.ui.tooling)
     implementation(project(":kross-clipboard"))
+    implementation(project(":kross-intents"))
 }
