@@ -7,7 +7,7 @@ import platform.Foundation.URLQueryAllowedCharacterSet
 import platform.Foundation.stringByAddingPercentEncodingWithAllowedCharacters
 import platform.UIKit.UIApplication
 import platform.UIKit.UIApplicationOpenSettingsURLString
-
+//email not working, sms not picking the number, phone not workin
 actual object KrossIntents {
     actual fun openEmail(recipient: String, subject: String?, text: String?) {
         val encodedSubject = subject?.let {
@@ -36,7 +36,7 @@ actual object KrossIntents {
                 NSCharacterSet.URLQueryAllowedCharacterSet
             )
         }
-        val url = NSURL.URLWithString("sms:$phone?body=${encodedMessage}") ?: return
+        val url = NSURL.URLWithString("sms://$phone?body=${encodedMessage}") ?: return
         openUrl(url)
     }
 
