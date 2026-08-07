@@ -39,6 +39,12 @@ If you only need a specific feature, you can include individual modules.
 implementation("io.github.amanbutnot:kross-clipboard:<latest>")
 ```
 
+#### Intents
+```kotlin
+// In commonMain
+implementation("io.github.amanbutnot:kross-intents:<latest>")
+```
+
 ## Features
 
 ### Clipboard Management
@@ -48,6 +54,26 @@ Kross Clipboard provides a type-safe, unified API to interact with system clipbo
 - **Content Types**: Native support for Plain Text, HTML, and URLs.
 - **Type Safety**: Leverages Kotlin sealed classes for robust data handling.
 - **Lightweight**: Zero third-party dependencies.
+
+### Intent Management
+Kross Intents allows you to easily trigger common system actions like opening emails, maps, or settings.
+
+- **Email, Phone, SMS**: Quick access to communication apps.
+- **Maps**: Open locations with coordinates.
+- **System Settings**: Navigate directly to General settings.
+
+## Android Setup
+
+On Android, Kross requires the `KrossApplication` to be declared in your `AndroidManifest.xml` to handle context-dependent operations.
+
+```xml
+<application
+    android:name="io.github.kotlin.fibonacci.KrossApplication"
+    ...>
+</application>
+```
+
+If you are already using a custom `Application` class, ensure you initialize `KrossApplication` or provide the context manually (coming soon).
 
 ## Usage (Clipboard)
 
@@ -75,12 +101,27 @@ val text = klipboard.getData(KlipType.TEXT) as? KlipData.TEXT
 val html = klipboard.getData(KlipType.HTML) as? KlipData.HTML
 ```
 
+## Usage (Intents)
+
+Trigger common system actions using the `KrossIntents` singleton.
+
+```kotlin
+// Open Email
+KrossIntents.openEmail(recipient = "test@example.com", subject = "Hi", text = "Hello from Kross!")
+
+// Open Maps
+KrossIntents.openMaps(latitude = 37.7749, longitude = -122.4194)
+
+// Open Settings
+KrossIntents.openSettings()
+```
+
 ## Platform Support
 
 | Platform    | Minimum Version | Implementation     |
 |:------------|:----------------|:-------------------|
-| **Android** | API 24 (Nougat) | `ClipboardManager` |
-| **iOS**     | iOS 13.0        | `UIPasteboard`     |
+| **Android** | API 24 (Nougat) | `ClipboardManager` / `Intent` |
+| **iOS**     | iOS 13.0        | `UIPasteboard` / `UIApplication` |
 
 ## License
 
