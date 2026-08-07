@@ -62,18 +62,6 @@ Kross Intents allows you to easily trigger common system actions like opening em
 - **Maps**: Open locations with coordinates.
 - **System Settings**: Navigate directly to General settings.
 
-## Android Setup
-
-On Android, Kross requires the `KrossApplication` to be declared in your `AndroidManifest.xml` to handle context-dependent operations.
-
-```xml
-<application
-    android:name="io.github.kotlin.fibonacci.KrossApplication"
-    ...>
-</application>
-```
-
-If you are already using a custom `Application` class, ensure you initialize `KrossApplication` or provide the context manually (coming soon).
 
 ## Usage (Clipboard)
 
@@ -116,12 +104,7 @@ KrossIntents.openMaps(latitude = 37.7749, longitude = -122.4194)
 KrossIntents.openSettings()
 ```
 
-## Platform Support
 
-| Platform    | Minimum Version | Implementation     |
-|:------------|:----------------|:-------------------|
-| **Android** | API 24 (Nougat) | `ClipboardManager` / `Intent` |
-| **iOS**     | iOS 13.0        | `UIPasteboard` / `UIApplication` |
 
 ## License
 
