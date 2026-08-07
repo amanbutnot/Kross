@@ -14,12 +14,12 @@ actual object KrossIntents {
             (it as NSString).stringByAddingPercentEncodingWithAllowedCharacters(
                 NSCharacterSet.URLQueryAllowedCharacterSet
             )
-        }?:""
+        } ?: ""
         val encodedBody = text?.let {
             (it as NSString).stringByAddingPercentEncodingWithAllowedCharacters(
                 NSCharacterSet.URLQueryAllowedCharacterSet
             )
-        }?:""
+        } ?: ""
         val url = NSURL.URLWithString("mailto:$recipient?subject=$encodedSubject&body=$encodedBody")
             ?: return
         openUrl(url)
@@ -51,8 +51,7 @@ actual object KrossIntents {
     }
 
     private fun openUrl(url: NSURL) {
-        if (UIApplication.sharedApplication.canOpenURL(url)) {
-            UIApplication.sharedApplication.openURL(url)
-        }
+            UIApplication.sharedApplication.openURL(url, options = emptyMap<Any?, Any?>(), null)
+
     }
 }
